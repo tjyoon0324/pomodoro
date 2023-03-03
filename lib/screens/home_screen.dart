@@ -63,16 +63,17 @@ class _HomeScreenState extends State<HomeScreen> {
             Icons.restart_alt_rounded,
           ));
     } else {
-      return IconButton(
-        onPressed: () {},
-        icon: Icon(
-          Icons.restart_alt_rounded,
-          color: Theme.of(context).colorScheme.background,
-          size: 1,
-        ),
-      );
+      return SizedBox.shrink();
     }
   }
+
+  // IconButton(
+  // onPressed: () {},
+  // icon: Icon(
+  // Icons.restart_alt_rounded,
+  // color: Theme.of(context).colorScheme.background,
+  // size: 1,
+  // ),
 
   void reset() {
     setState(() {
