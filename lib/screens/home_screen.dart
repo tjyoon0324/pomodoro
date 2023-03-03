@@ -90,9 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     icon: Icon(isRunning
                         ? Icons.pause_circle_filled_outlined
                         : Icons.play_circle_outline),
-                    onPressed: () {
-                      isRunning ? onPausePressed() : onStartPressed();
-                    },
+                    onPressed: isRunning ? onPausePressed : onStartPressed,
                   ),
                   if(!isRunning && total_seconds != 1500) IconButton(onPressed: (){reset();}, icon: Icon(Icons.restart_alt_outlined)),
                 ],
