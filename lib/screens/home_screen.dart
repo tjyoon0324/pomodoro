@@ -10,7 +10,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   static const twentyFiveMinutes = 1500;
-  int total_seconds = twentyFiveMinutes ;
+  int total_seconds = twentyFiveMinutes;
+
   late Timer timer;
   bool isRunning = false;
   int total_pomodoros = 0;
@@ -47,9 +48,36 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  String format(int seconds){
+  String format(int seconds) {
     var duration = Duration(seconds: seconds);
     return duration.toString().split('.').first.substring(2);
+  }
+
+  Widget showReset() {
+    if (isRunning == false && total_seconds != 1500) {
+      return IconButton(
+          onPressed: () {
+            reset();
+          },
+          icon: Icon(
+            Icons.restart_alt_rounded,
+          ));
+    } else {
+      return IconButton(
+        onPressed: () {},
+        icon: Icon(
+          Icons.restart_alt_rounded,
+          color: Theme.of(context).colorScheme.background,
+          size: 1,
+        ),
+      );
+    }
+  }
+
+  void reset() {
+    setState(() {
+      total_seconds = twentyFiveMinutes;
+    });
   }
 
   @override
@@ -75,15 +103,20 @@ class _HomeScreenState extends State<HomeScreen> {
           Flexible(
             flex: 3,
             child: Center(
-              child: IconButton(
-                iconSize: 120,
-                color: Theme.of(context).cardColor,
-                icon: Icon(isRunning
-                    ? Icons.pause_circle_filled_outlined
-                    : Icons.play_circle_outline),
-                onPressed: () {
-                  isRunning ? onPausePressed() : onStartPressed();
-                },
+              child: Column(
+                children: [
+                  IconButton(
+                    iconSize: 120,
+                    color: Theme.of(context).cardColor,
+                    icon: Icon(isRunning
+                        ? Icons.pause_circle_filled_outlined
+                        : Icons.play_circle_outline),
+                    onPressed: () {
+                      isRunning ? onPausePressed() : onStartPressed();
+                    },
+                  ),
+                  showReset(),
+                ],
               ),
             ),
           ),
