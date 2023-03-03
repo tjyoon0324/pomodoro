@@ -53,28 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return duration.toString().split('.').first.substring(2);
   }
 
-  Widget showReset() {
-    if (isRunning == false && total_seconds != 1500) {
-      return IconButton(
-          onPressed: () {
-            reset();
-          },
-          icon: Icon(
-            Icons.restart_alt_rounded,
-          ));
-    } else {
-      return SizedBox.shrink();
-    }
-  }
-
-  // IconButton(
-  // onPressed: () {},
-  // icon: Icon(
-  // Icons.restart_alt_rounded,
-  // color: Theme.of(context).colorScheme.background,
-  // size: 1,
-  // ),
-
   void reset() {
     setState(() {
       total_seconds = twentyFiveMinutes;
@@ -116,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       isRunning ? onPausePressed() : onStartPressed();
                     },
                   ),
-                  showReset(),
+                  if(!isRunning && total_seconds != 1500) IconButton(onPressed: (){reset();}, icon: Icon(Icons.restart_alt_outlined)),
                 ],
               ),
             ),
